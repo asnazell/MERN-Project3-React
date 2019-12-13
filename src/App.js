@@ -1,13 +1,15 @@
 import React from "react";
 import ToDoList from "./components/ToDoList";
-import logo from "./logo.svg";
+import AddToDo from "./components/AddToDo";
+import { BrowserRouter, Route } from "react-router-dom";
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <ToDoList />
-    </div>
+    <BrowserRouter>
+      <Route exact path="/" component={ToDoList} />
+      <Route path="/add" component={AddToDo} />
+    </BrowserRouter>
   );
 }
 

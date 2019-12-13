@@ -1,10 +1,12 @@
 import React from "react";
+import Nav from "./Nav";
+// import { Navbar, Jumbotron, Button } from "react-bootstrap";
 
 class ToDoList extends React.Component {
   constructor() {
     super();
     this.state = {
-      todo: []
+      todos: []
     };
   }
 
@@ -13,7 +15,7 @@ class ToDoList extends React.Component {
     const todoList = await todo.json();
     console.log("todoList", todoList);
     this.setState({
-      todo: todoList
+      todos: todoList
     });
   };
 
@@ -21,24 +23,35 @@ class ToDoList extends React.Component {
     this.getToDoReact();
   }
 
+  handleRemove = async todo => {
+    const response = await this.postData(todo._id);
+    console.log("response", response);
+    this.getToDoReact();
+  };
+
+  postData = todoId => {
+    return fetch(`http://localhost:4000/todo/delete/${todoId}`, {
+      method: "DELETE"
+    });
+  };
+
   render() {
     // if (this.state.todo.length < 1) {
     //   return <React.Fragment>Loading</React.Fragment>;
     // }
     return (
       <React.Fragment>
-        <h2>ToDoReact List</h2>
+        <h2>Todo List</h2>
+        <Nav />
         <ul>
-          {/* {this.state.todo.map(crime => {
+          {this.state.todos.map(todo => {
             return (
-              <li key={todo.id}>
-                {crime.primary_type} -
-                <button data-id={todo.id} onClick={this.handleRemove}>
-                  Remove
-                </button>
+              <li key={todo._id}>
+                {todo.title}
+                <button onClick={() => this.handleRemove(todo)}>Remove</button>
               </li>
             );
-          })} */}
+          })}
         </ul>
       </React.Fragment>
     );
