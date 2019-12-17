@@ -1,16 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+const linkStyle = {
+  textDecoration: "none"
+};
+
 const Nav = () => (
-  <ul>
-    <li>
-      <Link to="/">Todo List</Link>
+  <ul style={navListStyle}>
+    <li style={navListItemStyle}>
+      <Link style={linkStyle} to="/">
+        Home
+      </Link>
     </li>
-    <li>
-      <Link to="/add">Add To Do</Link>
+    <li style={navListItemStyle}>
+      <Link style={linkStyle} to="/about">
+        About
+      </Link>
+    </li>
+    <li style={navListItemStyle}>
+      <Link to="/add">Add new task</Link>
     </li>
   </ul>
 );
+
+const navListStyle = {
+  listStyle: "none",
+  padding: "0px",
+  fontFamily: "'Roboto', sans-serif"
+};
+
+const navListItemStyle = {
+  display: "inline-block",
+  paddingRight: "15px"
+};
 
 export default Nav;
 

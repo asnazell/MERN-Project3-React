@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "./Nav";
+import { h2 } from "../styles";
 
 class AddToDo extends React.Component {
   constructor() {
@@ -19,7 +19,7 @@ class AddToDo extends React.Component {
         title: todo,
         description: "Family Activity List",
         frequency: "daily",
-        status: true,
+        status: false,
         user: "Assel"
       })
     });
@@ -38,17 +38,19 @@ class AddToDo extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h2>Add ToDo</h2>
-        <Nav />
-        <input
-          type="text"
-          id="todo"
-          name="todo"
-          placeholder="Enter task"
-          value={this.state.todo}
-          onChange={this.handleTodoInputChange}
-        />
-        <button onClick={this.handleTodoAdd}>Add</button>
+        <h2 style={h2}>Add new task</h2>
+        <div className="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="todo"
+            name="todo"
+            placeholder="Enter task"
+            value={this.state.todo}
+            onChange={this.handleTodoInputChange}
+          />
+          <button onClick={this.handleTodoAdd}>Add</button>
+        </div>
       </React.Fragment>
     );
   }

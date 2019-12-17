@@ -1,7 +1,7 @@
 import React from "react";
-import Nav from "./Nav";
+import { Link } from "react-router-dom";
 // import { Navbar, Jumbotron, Button } from "react-bootstrap";
-
+import { h2 } from "../styles";
 class ToDoList extends React.Component {
   constructor() {
     super();
@@ -41,21 +41,54 @@ class ToDoList extends React.Component {
     // }
     return (
       <React.Fragment>
-        <h2>Todo List</h2>
-        <Nav />
-        <ul>
+        <h2 style={h2}>View all tasks</h2>
+        <table style={table}>
+          <tr style={tr}>
+            <th style={listItem}>Task</th>
+            <th style={listItem}>Description</th>
+            <th style={listItem}>Frequency</th>
+            <th style={listItem}>Status</th>
+            <th style={listItem}>User</th>
+            <th style={listItem}>Actions</th>
+          </tr>
           {this.state.todos.map(todo => {
             return (
-              <li key={todo._id}>
-                {todo.title}
-                <button onClick={() => this.handleRemove(todo)}>Remove</button>
-              </li>
+              <tr style={tr} key={todo._id}>
+                <td style={listItem}>{todo.title}</td>
+                <td style={listItem}>{todo.description}</td>
+                <td style={listItem}>{todo.frequency}</td>
+                <td style={listItem}>{todo.status ? "done" : "-"}</td>
+                <td style={listItem}>{todo.user}</td>
+                <td style={listItem}>
+                  <Link to={`/edit/${todo._id}`}>Edit</Link>&nbsp;
+                  <a href="#" onClick={() => this.handleRemove(todo)}>
+                    Remove
+                  </a>
+                </td>
+                {/* 
+                <button >Remove</button> */}
+              </tr>
             );
           })}
-        </ul>
+        </table>
       </React.Fragment>
     );
   }
 }
+
+const table = {
+  width: "100%",
+  borderTop: "dotted 1px #add8e6",
+  fontFamily: "'Roboto', sans-serif",
+  fontSize: "14px"
+};
+
+const tr = {
+  borderBottom: "dotted 1px #add8e6"
+};
+
+const listItem = {
+  padding: "5px"
+};
 
 export default ToDoList;
